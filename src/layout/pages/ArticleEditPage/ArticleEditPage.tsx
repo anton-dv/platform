@@ -59,7 +59,10 @@ export const ArticleEditPage: FC = () => {
     const result = id ? await articles.edit(id, data) : await articles.create(data);
     setLoading(false);
 
-    if (result) navigate.toArticles();
+    if (result) {
+      if(id) navigate.toArticle(id);
+      else navigate.toArticles();
+    }
     else navigate.toOops();
   };
 
