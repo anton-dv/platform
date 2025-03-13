@@ -1,0 +1,41 @@
+@use "./colors" as colors;
+@use "./text" as text;
+
+.hidden {
+  display: none !important;
+}
+
+.ant-pagination.ant-pagination-center.ant-pagination-mini .ant-pagination-options {
+  display: none !important;
+}
+
+.ant-pagination-jump-prev.ant-pagination-jump-prev-custom-icon,
+.ant-pagination-jump-next.ant-pagination-jump-next-custom-icon {
+  display: none !important;
+}
+
+.ant-pagination-item.ant-pagination-item-before-jump-next,
+.ant-pagination-item.ant-pagination-item-after-jump-prev {
+  display: inline-block !important;
+}
+
+.ant-checkbox-wrapper {
+  .ant-checkbox {
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+}
+
+.ant-popconfirm-message,
+.ant-checkbox-label {
+  @include text.roboto-md;
+  color: colors.$dark-grey;
+}
+
+.ant-popover-content {
+  max-width: 240px;
+}
+
+.ant-btn-loading-icon-motion-leave {
+  display: none;
+}

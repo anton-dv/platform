@@ -1,0 +1,28 @@
+@use "./fonts";
+@use "./colors" as colors;
+@use "./text" as text;
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: colors.$background;
+  padding-bottom: 20px;
+}
+
+.ant-pagination .ant-pagination-item-active a {
+  color: white !important;
+
+  &:hover {
+    color: white !important;
+  }
+}
+
+:focus {
+  outline: 0;
+}

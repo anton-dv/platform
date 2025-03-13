@@ -1,0 +1,8 @@
+.loading {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  inset: -10px;
+  z-index: 10;
+}

@@ -1,0 +1,22 @@
+@use "../../../../scss/colors" as colors;
+@use "../../../../scss/text" as text;
+
+.article-description {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+
+.article-description__text {
+  @include text.inter-sm;
+  color: colors.$text;
+  width: 75%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-height: 40px;
+}
+
+.article-description__buttons {
+  display: flex;
+  gap: 6px;
+}

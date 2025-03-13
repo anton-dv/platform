@@ -1,0 +1,32 @@
+@use "../../../scss/colors" as colors;
+@use "../../../scss/shadows" as shadows;
+
+.backdrop {
+  @include shadows.shadow-2;
+  background-color: colors.$background-base;
+  margin-inline: auto;
+}
+
+@mixin backdrop-init($offset, $width, $padding, $radius) {
+  margin-top: $offset;
+  max-width: $width;
+  padding: $padding;
+  border-radius: $radius;
+}
+
+.backdrop--article-preview {
+  @include backdrop-init(26px, 938px, 16px, 5px);
+  height: 140px;
+}
+
+.backdrop--article-view {
+  @include backdrop-init(26px, 938px, 16px, 0);
+}
+
+.backdrop--article-edit {
+  @include backdrop-init(34px, 938px, 48px 32px, 6px);
+}
+
+.backdrop--form {
+  @include backdrop-init(26px, 384px, 48px 32px, 6px);
+}

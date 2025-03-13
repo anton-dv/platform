@@ -1,0 +1,5 @@
+@use "./colors" as colors;
+
+@mixin shadow-2 {
+  box-shadow: 0 4px 12px 0 #00000026;
+}

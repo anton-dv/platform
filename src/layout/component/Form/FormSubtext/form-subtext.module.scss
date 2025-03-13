@@ -1,0 +1,13 @@
+@use "../../../../scss/text" as text;
+@use "../../../../scss/colors" as colors;
+
+.form-subtext {
+  @include text.roboto-sm;
+  color: colors.$grey;
+  text-align: center;
+
+  a {
+    color: colors.$info;
+    text-decoration: none;
+  }
+}

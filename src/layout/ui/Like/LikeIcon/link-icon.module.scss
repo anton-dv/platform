@@ -1,0 +1,19 @@
+@use "../../../../scss/durations" as durations;
+
+.like-icon {
+  width: 16px;
+  height: 16px;
+  position: relative;
+  margin-right: 3px;
+}
+
+.like-icon__svg {
+  top: 2px;
+  left: 0;
+  transform: scale(0);
+  position: absolute;
+}
+
+.like-icon__svg--current {
+  transform: scale(1);
+}

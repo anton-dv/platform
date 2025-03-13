@@ -1,0 +1,90 @@
+@mixin text-base {
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+@mixin roboto-base {
+  @include text-base;
+  font-family: "Roboto", sans-serif;
+}
+
+@mixin roboto-sm {
+  @include roboto-base;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+@mixin roboto-md {
+  @include roboto-base;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+@mixin roboto-lg {
+  @include roboto-base;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@mixin inter-base {
+  @include text-base;
+  font-family: "Inter", sans-serif;
+  line-height: 22px;
+}
+
+@mixin inter-sm {
+  @include inter-base;
+  font-size: 12px;
+}
+
+@mixin inter-md {
+  @include inter-base;
+  font-size: 14px;
+}
+
+@mixin inter-lg {
+  @include inter-base;
+  font-size: 16px;
+}
+
+@mixin roboto-header {
+  @include roboto-base;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+@mixin inter-header($size) {
+  @include text-base;
+  font-family: "Inter", sans-serif;
+
+  @if $size == 1 {
+    font-size: 44px;
+    line-height: 76px;
+  }
+
+  @if $size == 2 {
+    font-weight: 400;
+    font-size: 56px;
+  }
+
+  @if $size == 3 {
+    font-weight: 400;
+    font-size: 30px;
+  }
+
+  @if $size == 4 {
+    font-weight: 400;
+    font-size: 24px;
+  }
+
+  @if $size == 5 {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  @if $size == 6 {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}

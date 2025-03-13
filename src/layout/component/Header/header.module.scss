@@ -1,0 +1,31 @@
+@use "../../../scss/colors" as colors;
+@use "../../../scss/text" as text;
+@use "../../../scss/shadows" as shadows;
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  top: 0;
+  width: 100%;
+  height: 80px;
+  padding: 16px 22px;
+  background-color: colors.$background-base;
+}
+
+.header__title {
+  font-size: 0;
+  button {
+    @include text.inter-header(6);
+    color: colors.$heading;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+}
+
+.header__info {
+  display: flex;
+  gap: 27px;
+}

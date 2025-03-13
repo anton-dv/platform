@@ -1,0 +1,8 @@
+@use "../../../../scss/text" as text;
+@use "../../../../scss/colors" as colors;
+
+.form-header {
+  @include text.roboto-header;
+  color: colors.$registration;
+  text-align: center;
+}

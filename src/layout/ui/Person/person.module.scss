@@ -1,0 +1,52 @@
+@use "../../../scss/text" as text;
+@use "../../../scss/colors" as colors;
+
+.person {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.person__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.person__avatar {
+  position: relative;
+
+  img {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  button {
+    border: none;
+    outline: none;
+    background: transparent;
+  }
+}
+
+.person__name {
+  @include text.inter-header(6);
+  color: colors.$heading;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.person__date {
+  @include text.inter-sm;
+  color: colors.$text-secondary;
+  white-space: nowrap;;
+}
+
+.person__loader {
+  position: absolute;
+  inset: 0;
+  background-color: white;
+}

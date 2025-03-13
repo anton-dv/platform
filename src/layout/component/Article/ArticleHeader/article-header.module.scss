@@ -1,0 +1,37 @@
+@use "../../../../scss/colors" as colors;
+@use "../../../../scss/text" as text;
+
+.article-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.article-header__start {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 80%;
+}
+
+.article-header__title {
+  display: flex;
+  gap: 13px;
+
+  h2 {
+    @include text.inter-header(5);
+    color: colors.$info;
+    max-width: 600px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+}
+

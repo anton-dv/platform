@@ -1,0 +1,21 @@
+@use "../../../../scss/colors" as colors;
+@use "../../../../scss/text" as text;
+
+.article-content {
+  @include text.inter-md;
+  color: colors.$text;
+  padding-top: 25px;
+  min-height: 600px;
+
+  li {
+    margin-left: 16px;
+  }
+
+  p, h1, h2, h3, h4, h5, h6 {
+    margin-block: .5em;
+  }
+
+  * {
+    max-width: 100%;
+  }
+}

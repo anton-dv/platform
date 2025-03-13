@@ -1,0 +1,8 @@
+@use "../../../../scss/text" as text;
+@use "../../../../scss/colors" as colors;
+
+.form-button {
+  @include text.roboto-lg;
+  width: 100%;
+  height: 40px;
+}

@@ -1,0 +1,13 @@
+@use "../../../scss/text" as text;
+@use "../../../scss/colors" as colors;
+
+.message-page {
+  @include text.inter-header(3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: colors.$text;
+  padding-top: calc(50vh - 95px);
+  white-space: pre-line;
+  text-align: center;
+}

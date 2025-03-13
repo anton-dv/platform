@@ -1,0 +1,15 @@
+@use "../../../scss/colors" as colors;
+@use "../../../scss/text" as text;
+
+.article-edit-page {
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+  position: relative;
+}
+
+.article-edit-page__title {
+  @include text.roboto-header;
+  text-align: center;
+  color: colors.$registration;
+}

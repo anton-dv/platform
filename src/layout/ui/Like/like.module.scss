@@ -1,0 +1,16 @@
+@use "../../../scss/durations" as durations;
+
+.like {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  &:hover {
+    svg, div {
+      transition: durations.$fast ease-in-out transform;
+    }
+  }
+}

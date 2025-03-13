@@ -1,0 +1,17 @@
+@use "../../../scss/colors" as colors;
+@use "../../../scss/text" as text;
+
+.tag {
+  @include text.inter-sm;
+  line-height: 17px;
+  color: colors.$text-secondary;
+  border: 1px solid colors.$text-secondary;
+  border-radius: 3px;
+  background-color: transparent;
+  padding: 0 5px;
+  white-space: nowrap;
+  max-width: 700px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}

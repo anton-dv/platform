@@ -1,0 +1,17 @@
+$path: '../assets/';
+
+@mixin include-font($name, $postfix, $weight) {
+  @font-face {
+    font-family: $name;
+    src: local('#{$name}#{$postfix}'), local('#{$name}-#{$postfix}'),
+      url('#{$path}#{$name}-#{$postfix}.woff2') format('woff2'),
+      url('#{$path}#{$name}-#{$postfix}.woff') format('woff');
+    font-weight: $weight;
+    font-style: normal;
+    font-display: swap;
+  }
+}
+
+@include include-font("Inter", "Regular", 400);
+@include include-font("Roboto", "Regular", 400);
+@include include-font("Roboto", "Medium", 500);

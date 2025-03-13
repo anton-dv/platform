@@ -1,0 +1,18 @@
+@use "../../../../scss/colors" as colors;
+@use "../../../../scss/text" as text;
+
+.article-edit-tag-section__title {
+  @include text.roboto-md;
+  color: colors.$registration;
+  display: block;
+  padding-bottom: 2px;
+}
+
+.article-edit-tag-section__body {
+  display: flex;
+  gap: 12px;
+
+  button {
+    align-self: flex-end;
+  }
+}

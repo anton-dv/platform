@@ -1,0 +1,80 @@
+@use "../../../scss/colors" as colors;
+@use "../../../scss/text" as text;
+@use "../../../scss/durations" as durations;
+
+@mixin button-style($color) {
+  border-color: $color;
+  color: $color;
+
+  &:hover {
+    border-color: color(from $color srgb r g b / 0.5);
+    color: color(from $color srgb r g b / 0.5);
+  }
+
+  &:active {
+    border-color: color(from $color srgb r g b / 0.3);
+    color: color(from $color srgb r g b / 0.3);
+  }
+}
+
+.button {
+  // position: relative;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  background-color: transparent;
+  align-self: center;
+
+  transition: durations.$fast ease-in-out color, durations.$fast ease-in-out border-color,
+    durations.$fast ease-in-out background-color;
+
+  cursor: pointer;
+}
+
+.button--big {
+  @include text.inter-header(6);
+  padding: 10.5px 20.5px;
+}
+
+.button--medium {
+  @include text.roboto-lg;
+  padding: 8px 37px;
+  height: 40px;
+}
+
+.button--small {
+  @include text.inter-md;
+  padding: 3.5px 16.6px;
+}
+
+.button--green {
+  @include button-style(colors.$success);
+}
+
+.button--red {
+  @include button-style(colors.$error);
+}
+
+.button--blue {
+  @include button-style(colors.$info);
+}
+
+.button--yellow {
+  @include button-style(colors.$warning);
+}
+
+.button--normal {
+  @include button-style(colors.$text);
+}
+
+.button--empty {
+  border: none;
+
+  &:hover {
+    background-color: colors.$table-header;
+  }
+
+  &:active {
+    background-color: colors.$dividers;
+  }
+}

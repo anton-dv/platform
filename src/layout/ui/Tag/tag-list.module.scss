@@ -1,0 +1,13 @@
+.tag-list {
+  display: flex;
+  gap: 8px;
+  padding-right: 5px;
+}
+
+.tag-list__measure {
+  position: absolute;
+  display: flex;
+  gap: 10px;
+  margin-left: 1px;
+  visibility: hidden;
+}
