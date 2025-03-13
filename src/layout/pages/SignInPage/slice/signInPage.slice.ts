@@ -27,7 +27,10 @@ export const signInSlice = createSlice({
     setSignInEmailError: (state, action) => {
       state.errors.email = action.payload;
     },
-    resetSignIn: (state) => state = initialState,
+    resetSignIn: (state) => {
+      state.values = initialState.values;
+      state.errors = initialState.errors;
+    }
   },
 })
 

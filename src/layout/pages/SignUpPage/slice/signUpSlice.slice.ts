@@ -46,8 +46,10 @@ export const signUpSlice = createSlice({
     setSignUpAgreeError: (state, action) => {
       state.errors.agree = action.payload;
     },
-
-    resetSignUp: (state) => state = initialState,
+    resetSignUp: (state) => {
+      state.values = initialState.values;
+      state.errors = initialState.errors;
+    }
   },
 })
 

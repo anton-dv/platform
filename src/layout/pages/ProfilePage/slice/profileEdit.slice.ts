@@ -42,7 +42,10 @@ export const profileEditSlice = createSlice({
       state.errors.image = action.payload;
     },
 
-    resetProfile: (state) => state = initialState,
+    resetProfile: (state) => {
+      state.values = initialState.values;
+      state.errors = initialState.errors;
+    }
   },
 })
 
