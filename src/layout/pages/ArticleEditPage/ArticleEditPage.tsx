@@ -12,47 +12,37 @@ import { useParams } from "react-router-dom";
 
 import classes from "./article-edit-page.module.scss";
 import { useAppNavigate } from "../../../hooks/useAppNavigate";
-
+import { useArticleEditValues } from "./hook/useArticleEditValues";
 
 export const ArticleEditPage: FC = () => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
 
   const { id } = useParams();
   const articles = useArticles();
   const navigate = useAppNavigate();
+  const state = useArticleEditValues();
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [body, setBody] = useState("");
-  const [tags, setTags] = useState<string[]>([]);
+  const loadArticle = async () => {
+    if (!id) return;
+    setLoading(true);
+    const article = await articles.getOne(id);
+    state.set.article(article);
+    setLoading(false);
+  };
 
   useEffect(() => {
-    if (id) {
-      setLoading(true);
-      articles.getOne(id).then(article => {
-        if (article) {
-          setTitle(article.title);
-          setDescription(article.description);
-          setBody(article.body);
-          setTags(article.tags);
-          setLoading(false);
-        }
-      });
-    }
-  }, []);
+    state.reset();
+    loadArticle();
+  }, [id]);
 
   const onSubmit = async () => {
-    if (title.trim() === "") {
-      setError(true);
-      return;
-    }
+    const isValid = state.validate();
+
+    if (!isValid) return;
 
     const data = {
-      title,
-      description,
-      body,
-      tagList: tags.filter(tag => tag),
+      ...state.values,
+      tagList: state.values.tags.filter(tag => tag),
     };
 
     setLoading(true);
@@ -60,17 +50,12 @@ export const ArticleEditPage: FC = () => {
     setLoading(false);
 
     if (result) {
-      if(id) navigate.toArticle(id);
+      if (id) navigate.toArticle(id);
       else navigate.toArticles();
-    }
-    else navigate.toOops();
+    } else navigate.toOops();
   };
 
-  const onTitleChange = (value: string) => {
-    setError(false);
-    setTitle(value);
-  };
-
+  console.log(state.values)
   return (
     <BasePage>
       <Backdrop type={BackdropType.ArticleEdit}>
@@ -82,18 +67,25 @@ export const ArticleEditPage: FC = () => {
             {loading && <Loading />}
             <Input
               name="Title"
-              value={title}
-              onChange={onTitleChange}
-              error={error ? "Title cannot be empty." : undefined}
+              value={state.values.title}
+              onChange={state.set.title}
+              error={state.errors.title}
             />
             <Input
               name="Short description"
               placeholder="Title"
-              value={description}
-              onChange={setDescription}
+              value={state.values.description}
+              onChange={state.set.description}
+              error={state.errors.description}
             />
-            <Input name="Text" height={168} value={body} onChange={setBody} />
-            <ArticleEditTagSection tags={tags} onChange={setTags} />
+            <Input
+              name="Text"
+              height={168}
+              value={state.values.body}
+              onChange={state.set.body}
+              error={state.errors.body}
+            />
+            <ArticleEditTagSection tags={state.values.tags} onChange={state.set.tags} />
           </div>
 
           <FormButton title="Send" onSubmit={onSubmit} width={320} />

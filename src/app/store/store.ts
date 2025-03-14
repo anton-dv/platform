@@ -3,6 +3,7 @@ import { userSlice } from './slices/userSlice.slice';
 import { signInSlice } from '../../layout/pages/SignInPage/slice/signInPage.slice';
 import { signUpSlice } from '../../layout/pages/SignUpPage/slice/signUpSlice.slice';
 import { profileEditSlice } from '../../layout/pages/ProfilePage/slice/profileEdit.slice';
+import { articleEditSlice } from '../../layout/pages/ArticleEditPage/slice/articleEditSlice.slice';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     signIn: signInSlice.reducer,
     signUp: signUpSlice.reducer,
     profile: profileEditSlice.reducer,
+    articleEdit: articleEditSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false
