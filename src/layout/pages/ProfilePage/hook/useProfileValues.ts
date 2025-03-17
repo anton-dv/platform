@@ -1,57 +1,41 @@
-import { useAppDispatch, useAppSelector } from "../../../../app/store/hooks";
+import { useState } from "react";
+import { Authorization } from "../../../../api/models/types/Authorization";
+import { Profile } from "../../../../api/models/types/Profile";
 import { Validator } from "../../../../utils/validator/Validator";
 import { avatarRules } from "../rules/avatar.rules";
 import { emailRules } from "../rules/email.rules";
 import { passwordRules } from "../rules/password.rules";
 import { usernameRules } from "../rules/username.rules";
-import {
-  resetProfile,
-  setProfileEmailError,
-  setProfileEmailValue,
-  setProfileImageError,
-  setProfileImageValue,
-  setProfilePasswordError,
-  setProfilePasswordValue,
-  setProfileUsernameError,
-  setProfileUsernameValue
-} from "../slice/profileEdit.slice";
 
 export const useProfileValues = () => {
-  const dispatch = useAppDispatch();
+  const defaultValue = { username: "", password: "", email: "", image: "" };
 
-  const values = useAppSelector(state => state.profile.values);
-  const errors = useAppSelector(state => state.profile.errors);
+  const [values, setValues] = useState<Profile & Authorization>(defaultValue);
+  const [errors, setErrors] = useState<Profile & Authorization>(defaultValue);
 
   return {
-    reset: () => { dispatch(resetProfile()); },
-    values: {
-      username: values.username,
-      password: values.password,
-      email: values.email,
-      image: values.image,
+    reset: () => {
+      setValues(defaultValue);
+      setErrors(defaultValue);
     },
-    errors: {
-      username: errors.username,
-      password: errors.password,
-      email: errors.email,
-      image: errors.image,
-    },
+    values,
+    errors,
     set: {
       username: (username: string) => {
-        dispatch(setProfileUsernameValue(username));
-        dispatch(setProfileUsernameError(undefined));
+        setValues(prev => ({ ...prev, username }));
+        setErrors(prev => ({ ...prev, username: "" }));
       },
       password: (password: string) => {
-        dispatch(setProfilePasswordValue(password));
-        dispatch(setProfilePasswordError(undefined));
+        setValues(prev => ({ ...prev, password }));
+        setErrors(prev => ({ ...prev, password: "" }));
       },
       email: (email: string) => {
-        dispatch(setProfileEmailValue(email));
-        dispatch(setProfileEmailError(undefined));
+        setValues(prev => ({ ...prev, email }));
+        setErrors(prev => ({ ...prev, email: "" }));
       },
-      image: (email: string) => {
-        dispatch(setProfileImageValue(email));
-        dispatch(setProfileImageError(undefined));
+      image: (image: string) => {
+        setValues(prev => ({ ...prev, image }));
+        setErrors(prev => ({ ...prev, image: "" }));
       },
     },
     validate: () => {
@@ -60,10 +44,12 @@ export const useProfileValues = () => {
       const passwordMessage = Validator.validate(values.password, passwordRules);
       const avatarMessage = Validator.validate(values.image as string, avatarRules);
 
-      dispatch(setProfileUsernameError(usernameMessage));
-      dispatch(setProfilePasswordError(passwordMessage));
-      dispatch(setProfileEmailError(emailMessage));
-      dispatch(setProfileImageError(avatarMessage));
+      setErrors({
+        username: usernameMessage || "",
+        password: passwordMessage || "",
+        email: emailMessage || "",
+        image: avatarMessage || "",
+      });
 
       return !usernameMessage && !emailMessage && !passwordMessage && !avatarMessage;
     }
