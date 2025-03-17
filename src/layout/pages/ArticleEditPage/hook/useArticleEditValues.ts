@@ -1,63 +1,50 @@
+import { useState } from "react";
 import { ArticleObject } from "../../../../api/models/types/ArticleObject";
-import { useAppDispatch, useAppSelector } from "../../../../app/store/hooks";
 import { Validator } from "../../../../utils/validator/Validator";
-import {
-  resetArticleEdit,
-  setArticleEdit,
-  setArticleEditBodyError,
-  setArticleEditBodyValue,
-  setArticleEditDescriptionError,
-  setArticleEditDescriptionValue,
-  setArticleEditTagsValue,
-  setArticleEditTitleError,
-  setArticleEditTitleValue
-} from "../slice/articleEditSlice.slice";
+import { ArticleEditObject } from "../../../../api/models/types/ArticleEditObject";
 
 export const useArticleEditValues = () => {
-  const dispatch = useAppDispatch();
+  const defaultValues = { title: "", description: "", body: "", tagList: [] };
 
-  const values = useAppSelector(state => state.articleEdit.values);
-  const errors = useAppSelector(state => state.articleEdit.errors);
+  const [values, setValues] = useState<ArticleEditObject>(defaultValues);
+  const [errors, setErrors] = useState<ArticleEditObject>(defaultValues);
 
   return {
-    reset: () => { dispatch(resetArticleEdit()); },
+    reset: () => {
+      setValues(defaultValues);
+      setErrors(defaultValues);
+    },
 
-    values: {
-      title: values.title,
-      description: values.description,
-      body: values.body,
-      tags: values.tagList || [],
-    },
-    errors: {
-      title: errors.title,
-      description: errors.description,
-      body: errors.body,
-    },
+    values: { ...values, tags: values.tagList || [] },
+    errors,
 
     set: {
       title: (title: string) => {
-        dispatch(setArticleEditTitleValue(title));
-        dispatch(setArticleEditTitleError(undefined));
+        setValues(prev => ({ ...prev, title }));
+        setErrors(prev => ({ ...prev, title: "" }));
       },
       description: (description: string) => {
-        dispatch(setArticleEditDescriptionValue(description));
-        dispatch(setArticleEditDescriptionError(undefined));
+        setValues(prev => ({ ...prev, description }));
+        setErrors(prev => ({ ...prev, description: "" }));
       },
       body: (body: string) => {
-        dispatch(setArticleEditBodyValue(body));
-        dispatch(setArticleEditBodyError(undefined));
+        setValues(prev => ({ ...prev, body }));
+        setErrors(prev => ({ ...prev, body: "" }));
       },
       tags: (tags: string[]) => {
         console.log(tags)
-        dispatch(setArticleEditTagsValue(tags));
+        setValues(prev => ({ ...prev, tagList: tags }));
       },
       article: (article: ArticleObject | null) => {
-        if (!article) {
-          dispatch(resetArticleEdit());
-          return;
-        }
+        const articleValues = !article ? defaultValues : {
+          title: article.title,
+          description: article.description,
+          body: article.body,
+          tagList: article.tags,
+        };
 
-        dispatch(setArticleEdit(article))
+        setValues(articleValues);
+        setErrors(defaultValues);
       },
     },
     validate: () => {
@@ -72,9 +59,12 @@ export const useArticleEditValues = () => {
       const descriptionMessage = Validator.validate(values.description, commonRule);
       const bodyMessage = Validator.validate(values.body, commonRule);
 
-      dispatch(setArticleEditTitleError(titleMessage));
-      dispatch(setArticleEditDescriptionError(descriptionMessage));
-      dispatch(setArticleEditBodyError(bodyMessage));
+      setErrors({
+        title: titleMessage || "",
+        description: descriptionMessage || "",
+        body: bodyMessage || "",
+        tagList: [],
+      });
 
       return !titleMessage && !descriptionMessage && !bodyMessage;
     }
