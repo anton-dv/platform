@@ -22,6 +22,8 @@ export const Pagination: FC<PaginationProps> = ({ total, onSwitch }) => {
     const first = document.querySelector(".ant-pagination-item.ant-pagination-item-1");
     const last = document.querySelector(`.ant-pagination-item.ant-pagination-item-${total}`);
 
+    if (total <= 5) return;
+
     if (params.page >= 4) {
       if (first) first.classList.add("hidden");
     } else if (first) first.classList.remove("hidden");
