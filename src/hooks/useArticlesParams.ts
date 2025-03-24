@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { ArticlesFilter } from "../api/services/types/ArticlesFilter";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 
 export type ArticlesParams = {
   page: number,
@@ -8,10 +8,9 @@ export type ArticlesParams = {
 }
 
 export const useArticlesParams = (): ArticlesParams => {
-  const [params, setParams] = useState<ArticlesParams>({page: 1, filter: {}});
   const location = useLocation();
 
-  useEffect(() => {
+  return useMemo(() => {
     const searchParams = new URLSearchParams(location.search);
     const page = searchParams.get('page');
 
@@ -23,8 +22,6 @@ export const useArticlesParams = (): ArticlesParams => {
     if (tag) filter['tag'] = tag;
     if (author) filter['author'] = author;
 
-    setParams({ page: Number(page) || 1, filter });
-  }, [location])
-
-  return params;
+    return { page: Number(page) || 1, filter }
+  }, [location]);
 }
