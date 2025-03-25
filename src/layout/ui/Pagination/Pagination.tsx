@@ -19,18 +19,21 @@ export const Pagination: FC<PaginationProps> = ({ total, onSwitch }) => {
   const params = useArticlesParams();
 
   useEffect(() => {
-    const first = document.querySelector(".ant-pagination-item.ant-pagination-item-1");
-    const last = document.querySelector(`.ant-pagination-item.ant-pagination-item-${total}`);
-
     if (total <= 5) return;
 
-    if (params.page >= 4) {
-      if (first) first.classList.add("hidden");
-    } else if (first) first.classList.remove("hidden");
+    if(total === 7) {
+      const element2 = document.querySelector(`.ant-pagination-item-2`);
+      const element6 = document.querySelector(`.ant-pagination-item-6`);
 
-    if (params.page < total - 2) {
-      if (last) last.classList.add("hidden");
-    } else if (last) last.classList.remove("hidden");
+      element2?.classList.toggle("hidden", params.page >= 5);
+      element6?.classList.toggle("hidden", params.page <= 3);
+    }
+
+    const first = document.querySelector(".ant-pagination-item-1");
+    const last = document.querySelector(`.ant-pagination-item-${total}`);
+
+    first?.classList.toggle("hidden", params.page >= 4);
+    last?.classList.toggle("hidden", params.page < total - 2);
 
   }, [params.page, total]);
 
@@ -39,6 +42,7 @@ export const Pagination: FC<PaginationProps> = ({ total, onSwitch }) => {
   return (
     <ConfigProvider theme={paginationTheme}>
       <AntPagination
+
         style={{ marginTop: "26px" }}
         total={total * 10}
         current={params.page}
